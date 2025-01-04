@@ -1,0 +1,12 @@
+.titlethree {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #5ab315;
+}
+
+.infowraper {
+  display: flex;
+  gap: 1rem; /* Space between the links */
+  margin-bottom: 1.5rem;
+}

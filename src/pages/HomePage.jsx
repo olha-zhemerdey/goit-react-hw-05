@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getTrendingMovies } from "../services/api";
 import Loader from "../components/Loader/Loader";
 import MovieList from "../components/MovieList/MovieList";
+import { Title } from "../components/Title/Title";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 
 const HomePage = () => {
@@ -27,6 +28,7 @@ const HomePage = () => {
   return (
     <>
       {loader && <Loader />} {isError && <ErrorMessage />}
+      <Title title={"Trending today"} />
       {movies && <MovieList movies={movies} />}
     </>
   );

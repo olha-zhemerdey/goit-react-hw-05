@@ -1,3 +1,5 @@
+import css from "../SearchForm/SearchForm.module.css";
+
 const SearchForm = ({ onSubmitForm }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -7,7 +9,7 @@ const SearchForm = ({ onSubmitForm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={css.form} onSubmit={handleSubmit}>
       <input type="text" name="search" required />
       <button type="submit">Search</button>
     </form>

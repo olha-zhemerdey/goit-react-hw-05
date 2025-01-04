@@ -1,0 +1,5 @@
+.header {
+  display: flex;
+  gap: 1rem; /* Space between the links */
+  margin-bottom: 1.5rem;
+}

@@ -1,0 +1,15 @@
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  color: #24cd3a;
+}
+
+.top {
+  margin-top: 20px;
+}
+
+.bottom {
+  margin-bottom: 20px;
+}

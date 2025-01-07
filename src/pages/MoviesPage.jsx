@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSearchMovies } from "../services/api";
+import { fetchSearchMovies } from "../services/api";
 import { useSearchParams } from "react-router-dom";
 import SearchForm from "../components/SearchForm/SearchForm";
 import Loader from "../components/Loader/Loader";
@@ -18,9 +18,9 @@ const MoviesPage = () => {
   useEffect(() => {
     if (!query) return;
     setLoader(true);
-    const fetchSearchMovies = async () => {
+    const handleSearchMovies = async () => {
       try {
-        const data = await getSearchMovies(query);
+        const data = await fetchSearchMovies(query);
         setMovies(data.results);
       } catch (error) {
         setIsError(error);
@@ -28,7 +28,7 @@ const MoviesPage = () => {
         setLoader(false);
       }
     };
-    fetchSearchMovies();
+    handleSearchMovies();
   }, [query]);
 
   const onSubmitForm = (query) => {

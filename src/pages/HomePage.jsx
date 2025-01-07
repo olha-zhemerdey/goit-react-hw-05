@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTrendingMovies } from "../services/api";
+import { fetchTrendingMovies } from "../services/api";
 import Loader from "../components/Loader/Loader";
 import MovieList from "../components/MovieList/MovieList";
 import { Title } from "../components/Title/Title";
@@ -12,9 +12,9 @@ const HomePage = () => {
 
   useEffect(() => {
     setLoader(true);
-    const fetchTrendingMovies = async () => {
+    const handleTrendingMovies = async () => {
       try {
-        const { results } = await getTrendingMovies();
+        const { results } = await fetchTrendingMovies();
         setMovies(results);
       } catch (error) {
         setIsError(error);
@@ -22,7 +22,7 @@ const HomePage = () => {
         setLoader(false);
       }
     };
-    fetchTrendingMovies();
+    handleTrendingMovies();
   }, []);
 
   return (

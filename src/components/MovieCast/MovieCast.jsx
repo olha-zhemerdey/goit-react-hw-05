@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getCastMovie } from "../../services/api";
+import { fetchCastMovie } from "../../services/api";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import CastList from "../CastList/CastList";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import css from "./MovieCast.module.css";
 
 const MovieCast = () => {
   const { movieId } = useParams();
@@ -13,9 +14,9 @@ const MovieCast = () => {
 
   useEffect(() => {
     setLoader(true);
-    const fetchCastMovie = async () => {
+    const handleCastMovie = async () => {
       try {
-        const data = await getCastMovie(movieId);
+        const data = await fetchCastMovie(movieId);
         setDataMovie(data);
       } catch (error) {
         setIsError(error);
@@ -23,13 +24,24 @@ const MovieCast = () => {
         setLoader(false);
       }
     };
-    fetchCastMovie();
+    handleCastMovie();
   }, [movieId]);
+
+  const hasNoCast =
+    dataMovie && (!dataMovie.cast || dataMovie.cast.length === 0);
 
   return (
     <>
-      {loader && <Loader />} {isError && <ErrorMessage />}
-      {dataMovie && <CastList dataMovie={dataMovie} />}
+      {loader && <Loader />}
+      {isError && <ErrorMessage />}
+      {hasNoCast && (
+        <p className={css.noCastMessage}>
+          Unfortunately, there are no cast for this movie.
+        </p>
+      )}
+      {dataMovie && dataMovie.cast && dataMovie.cast.length > 0 && (
+        <CastList dataMovie={dataMovie} />
+      )}
     </>
   );
 };

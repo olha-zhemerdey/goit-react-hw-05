@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getDetailsMovie } from "../services/api";
+import { fetchDetailsMovie } from "../services/api";
 import Loader from "../components/Loader/Loader";
 import MovieDetails from "../components/MovieDetails/MovieDetails";
 import AdditionalInfo from "../components/AdditionalInfo/AdditionalInfo";
@@ -15,9 +15,9 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     setLoader(true);
-    const fetchDetailsMovie = async () => {
+    const handleDetailsMovie = async () => {
       try {
-        const data = await getDetailsMovie(movieId);
+        const data = await fetchDetailsMovie(movieId);
         setDataMovie(data);
       } catch (error) {
         setIsError(error);
@@ -25,7 +25,7 @@ const MovieDetailsPage = () => {
         setLoader(false);
       }
     };
-    fetchDetailsMovie();
+    handleDetailsMovie();
   }, [movieId]);
 
   return (

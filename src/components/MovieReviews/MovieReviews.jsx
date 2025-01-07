@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getReviewsMovie } from "../../services/api";
+import { fetchReviewsMovie } from "../../services/api";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import MovieReviewsList from "../MovieReviewList/MovieReviewList";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import css from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
   const { movieId } = useParams();
@@ -13,9 +14,9 @@ const MovieReviews = () => {
 
   useEffect(() => {
     setLoader(true);
-    const fetchReviewsMovie = async () => {
+    const handleReviewsMovie = async () => {
       try {
-        const data = await getReviewsMovie(movieId);
+        const data = await fetchReviewsMovie(movieId);
         setDataMovie(data.results);
       } catch (error) {
         setIsError(error);
@@ -23,7 +24,7 @@ const MovieReviews = () => {
         setLoader(false);
       }
     };
-    fetchReviewsMovie();
+    handleReviewsMovie();
   }, [movieId]);
 
   return (
@@ -32,7 +33,9 @@ const MovieReviews = () => {
       {dataMovie.length ? (
         <MovieReviewsList results={dataMovie} />
       ) : (
-        <p>There are no reviews for this movie</p>
+        <p className={css.noReviewMessage}>
+          There are no reviews for this movie
+        </p>
       )}
     </>
   );
